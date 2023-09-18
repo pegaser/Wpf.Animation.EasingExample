@@ -1,0 +1,33 @@
+﻿<Window x:Class="Wpf.Animation.EasingExample.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Wpf.Animation.EasingExample"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800">
+    <StackPanel>
+        <Button Name="myAnimatedButton" Height="30" Width="200" HorizontalAlignment="Center" Content="A Button">
+            <Button.Triggers>
+                <EventTrigger RoutedEvent="Button.MouseEnter">
+                    <BeginStoryboard>
+                        <Storyboard x:Name="growStoryboard">
+                            <DoubleAnimation Storyboard.TargetProperty="Width" To="400" Duration="0:0:1.5"></DoubleAnimation>
+                        </Storyboard>
+                    </BeginStoryboard>
+                </EventTrigger>
+                <EventTrigger RoutedEvent="Button.MouseLeave">
+                    <BeginStoryboard>
+                        <Storyboard x:Name="revertStoryboard">
+                            <DoubleAnimation Storyboard.TargetProperty="Width" Duration="0:0:3">
+                                <DoubleAnimation.EasingFunction>
+                                    <ElasticEase EasingMode="EaseIn" Oscillations="10"></ElasticEase>
+                                </DoubleAnimation.EasingFunction>
+                            </DoubleAnimation>
+                        </Storyboard>
+                    </BeginStoryboard>
+                </EventTrigger>
+            </Button.Triggers>
+        </Button>
+    </StackPanel>
+</Window>
